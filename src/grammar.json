@@ -1723,11 +1723,41 @@
         },
         {
           "type": "SYMBOL",
+          "name": "regex_literal"
+        },
+        {
+          "type": "SYMBOL",
           "name": "primitive"
         },
         {
           "type": "SYMBOL",
           "name": "_literal"
+        }
+      ]
+    },
+    "regex_literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "s"
+            },
+            {
+              "type": "STRING",
+              "value": "tr"
+            },
+            {
+              "type": "STRING",
+              "value": "y"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_external_regex_match"
         }
       ]
     },
@@ -3656,6 +3686,10 @@
         {
           "type": "STRING",
           "value": "//="
+        },
+        {
+          "type": "STRING",
+          "value": "=~"
         }
       ]
     },
@@ -5454,6 +5488,10 @@
     {
       "type": "SYMBOL",
       "name": "_NONASSOC"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_external_regex_match"
     },
     {
       "type": "SYMBOL",

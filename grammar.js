@@ -112,6 +112,8 @@ module.exports = grammar({
     $._brace_end_zw,
     /* zero-width high priority token */
     $._NONASSOC,
+    /* regexp related items */
+    $._external_regex_match,
     /* error condition must always be last; we don't use this in the grammar */
     $._ERROR
   ],
@@ -385,11 +387,15 @@ module.exports = grammar({
       $.variable_declaration,
       $.localization_expression,
 
+      $.regex_literal,
+
       // legacy
       $.primitive,
 
       $._literal,
     ),
+
+    regex_literal: $ => seq(choice('s', 'tr', 'y'), $._external_regex_match),
 
     assignment_expression: $ =>
       prec.right(TERMPREC.ASSIGNOP, binop($._ASSIGNOP, $._term)),
@@ -593,6 +599,8 @@ module.exports = grammar({
       // TODO: Also &.= |.= ^.= when enabled
       '<<=', '>>=',
       '&&=', '||=', '//=',
+      // Regexp bind
+      '=~'
     ),
     _OROR_DORDOR: $ => choice('||', '\/\/'),
     _ANDAND: $ => '&&',

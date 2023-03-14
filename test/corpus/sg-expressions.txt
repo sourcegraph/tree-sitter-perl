@@ -1,0 +1,59 @@
+================================================================================
+other assignments
+================================================================================
+
+$string =~ s/pattern/replacement/;
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (scalar)
+      (regex_literal))))
+
+================================================================================
+handles escaped slashes
+================================================================================
+
+
+$string =~ s/my\/pattern/replacement/;
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (scalar)
+      (regex_literal))))
+
+================================================================================
+broken regex recovers somewhat gracefully
+================================================================================
+
+
+$string = "hello world";
+$string =~ s/pattern/replacement;
+$string = "hello world";
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (expression_statement
+    (assignment_expression
+      (scalar)
+      (interpolated_string_literal)))
+  (expression_statement
+    (assignment_expression
+      (scalar)
+      (binary_expression
+        (binary_expression
+          (regex_literal
+            (MISSING _external_regex_match))
+          (bareword))
+        (bareword))))
+  (expression_statement
+    (assignment_expression
+      (scalar)
+      (interpolated_string_literal))))

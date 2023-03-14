@@ -47,6 +47,8 @@ enum TokenType {
   TOKEN_BRACE_END_ZW,
   /* zero-width high priority token */
   TOKEN_NONASSOC,
+  /* regexp related items */
+  TOKEN_REGEX_MATCH,
   /* error condition is always last */
   TOKEN_ERROR
 };
@@ -439,6 +441,39 @@ bool tree_sitter_perl_external_scanner_scan(
     }
     else {
       TOKEN(TOKEN_HASHBRACK);
+    }
+  }
+
+  // This could be the wrong spot to check this
+  if (valid_symbols[TOKEN_REGEX_MATCH]) {
+    // Next character *must* be a '/', otherwise it won't be valid.
+    if (lexer->lookahead == '/') {
+      ADVANCE_C;
+
+      while (lexer->lookahead != '/' && lexer->lookahead != '\n' && !lexer->eof(lexer)) {
+        if (lexer->lookahead == '\\') {
+          ADVANCE_C;
+        }
+        ADVANCE_C;
+      }
+
+      if (lexer->lookahead == '/') {
+        ADVANCE_C;
+        while (lexer->lookahead != '/' && lexer->lookahead != '\n' && !lexer->eof(lexer)) {
+          if (lexer->lookahead == '\\') {
+            ADVANCE_C;
+          }
+          ADVANCE_C;
+        }
+
+        if (lexer->lookahead == '/') {
+          ADVANCE_C;
+
+          TOKEN(TOKEN_REGEX_MATCH);
+        }
+      }
+
+      return false;
     }
   }
 

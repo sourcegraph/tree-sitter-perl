@@ -444,7 +444,21 @@ bool tree_sitter_perl_external_scanner_scan(
     }
   }
 
-  // This could be the wrong spot to check this
+  // This could be the wrong spot to check this, but it hasn't changed
+  // anything in the test suite, so I think it's safe for now.
+  //
+  // A potential improvement would be to separate create separate match groups like:
+  // $string =~ s/foo/bar/g
+  //            ^ regex start
+  //             ^ operator
+  //              ^^^ regex pattern
+  //                 ^ operator
+  //                  ^^^ regex pattern
+  //                     ^ operator
+  //                      ^ regex modifier
+  //
+  // But for now, we'll leave that for another day (and perhaps upstream will do that
+  // at some point anyway in a more robust perl fashion).
   if (valid_symbols[TOKEN_REGEX_MATCH]) {
     // Next character *must* be a '/', otherwise it won't be valid.
     if (lexer->lookahead == '/') {

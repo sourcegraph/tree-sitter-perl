@@ -395,7 +395,10 @@ module.exports = grammar({
       $._literal,
     ),
 
-    regex_literal: $ => seq(choice('s', 'tr', 'y'), $._external_regex_match),
+    regex_literal: $ => seq($.regex_start, $._external_regex_match, repeat($.regex_modifier)),
+    regex_start: _ => choice('s', 'tr', 'y'),
+    regex_modifier: _ => token.immediate(
+      choice('m', 's', 'i', 'x', 'p', 'o', 'd', 'u', 'a', 'l', 'n', 'g', 'c', 'e', 'r')),
 
     assignment_expression: $ =>
       prec.right(TERMPREC.ASSIGNOP, binop($._ASSIGNOP, $._term)),

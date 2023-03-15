@@ -3,6 +3,8 @@ other assignments
 ================================================================================
 
 $string =~ s/pattern/replacement/;
+$string =~ s/pattern/replacement/g;
+$string =~ s/pattern/replacement/gc;
 
 --------------------------------------------------------------------------------
 
@@ -10,7 +12,21 @@ $string =~ s/pattern/replacement/;
   (expression_statement
     (assignment_expression
       (scalar)
-      (regex_literal))))
+      (regex_literal
+        (regex_start))))
+  (expression_statement
+    (assignment_expression
+      (scalar)
+      (regex_literal
+        (regex_start)
+        (regex_modifier))))
+  (expression_statement
+    (assignment_expression
+      (scalar)
+      (regex_literal
+        (regex_start)
+        (regex_modifier)
+        (regex_modifier)))))
 
 ================================================================================
 handles escaped slashes
@@ -26,7 +42,8 @@ $string =~ s/my\/pattern/replacement/;
   (expression_statement
     (assignment_expression
       (scalar)
-      (regex_literal))))
+      (regex_literal
+        (regex_start)))))
 
 ================================================================================
 broken regex recovers somewhat gracefully
@@ -50,6 +67,7 @@ $string = "hello world";
       (binary_expression
         (binary_expression
           (regex_literal
+            (regex_start)
             (MISSING _external_regex_match))
           (bareword))
         (bareword))))

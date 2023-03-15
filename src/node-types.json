@@ -11823,6 +11823,25 @@
   {
     "type": "regex_literal",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "regex_modifier",
+          "named": true
+        },
+        {
+          "type": "regex_start",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "regex_start",
+    "named": true,
     "fields": {}
   },
   {
@@ -18091,6 +18110,10 @@
   {
     "type": "ref",
     "named": false
+  },
+  {
+    "type": "regex_modifier",
+    "named": true
   },
   {
     "type": "require",

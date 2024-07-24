@@ -3645,7 +3645,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_varname"
+          "name": "varname"
         }
       ]
     },
@@ -3671,23 +3671,32 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_varname"
+          "name": "varname"
         }
       ]
+    },
+    "_HASH_PERCENT": {
+      "type": "ALIAS",
+      "content": {
+        "type": "TOKEN",
+        "content": {
+          "type": "PREC",
+          "value": 2,
+          "content": {
+            "type": "STRING",
+            "value": "%"
+          }
+        }
+      },
+      "named": false,
+      "value": "%"
     },
     "hash": {
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 2,
-            "content": {
-              "type": "STRING",
-              "value": "%"
-            }
-          }
+          "type": "SYMBOL",
+          "name": "_HASH_PERCENT"
         },
         {
           "type": "SYMBOL",
@@ -3699,19 +3708,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PREC",
-            "value": 2,
-            "content": {
-              "type": "STRING",
-              "value": "%"
-            }
-          }
+          "type": "SYMBOL",
+          "name": "_HASH_PERCENT"
         },
         {
           "type": "SYMBOL",
-          "name": "_varname"
+          "name": "varname"
         }
       ]
     },
@@ -3762,7 +3764,7 @@
         }
       ]
     },
-    "_varname": {
+    "varname": {
       "type": "CHOICE",
       "members": [
         {
@@ -3775,50 +3777,64 @@
         }
       ]
     },
+    "_var_indirob_autoquote": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_PERLY_BRACE_OPEN"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_bareword"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_autoquotables"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_ident_special"
+              },
+              {
+                "type": "PATTERN",
+                "value": "\\^\\w+"
+              }
+            ]
+          },
+          "named": true,
+          "value": "varname"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_brace_end_zw"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
     "_var_indirob": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_indirob"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_indirob"
+          },
+          "named": true,
+          "value": "varname"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_PERLY_BRACE_OPEN"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "_bareword"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_autoquotables"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "_ident_special"
-                },
-                {
-                  "type": "PATTERN",
-                  "value": "\\^[A-Z]\\w*"
-                }
-              ]
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_brace_end_zw"
-            },
-            {
-              "type": "STRING",
-              "value": "}"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_var_indirob_autoquote"
         }
       ]
     },
@@ -5784,4 +5800,3 @@
     "primitive"
   ]
 }
-

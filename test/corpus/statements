@@ -5,7 +5,9 @@ expression as statement
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (number)))
+  (expression_statement
+    (number)))
+
 ================================================================================
 postfix if
 ================================================================================
@@ -13,7 +15,11 @@ postfix if
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (postfix_if_expression (number) (number))))
+  (expression_statement
+    (postfix_if_expression
+      (number)
+      (number))))
+
 ================================================================================
 postfix unless
 ================================================================================
@@ -21,7 +27,11 @@ postfix unless
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (postfix_unless_expression (number) (number))))
+  (expression_statement
+    (postfix_unless_expression
+      (number)
+      (number))))
+
 ================================================================================
 postfix while
 ================================================================================
@@ -29,7 +39,11 @@ postfix while
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (postfix_while_expression (number) (number))))
+  (expression_statement
+    (postfix_while_expression
+      (number)
+      (number))))
+
 ================================================================================
 postfix until
 ================================================================================
@@ -37,7 +51,11 @@ postfix until
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (postfix_until_expression (number) (number))))
+  (expression_statement
+    (postfix_until_expression
+      (number)
+      (number))))
+
 ================================================================================
 postfix for
 ================================================================================
@@ -46,8 +64,15 @@ postfix for
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (postfix_for_expression (number) (number)))
-  (expression_statement (postfix_for_expression (number) (number))))
+  (expression_statement
+    (postfix_for_expression
+      (number)
+      (number)))
+  (expression_statement
+    (postfix_for_expression
+      (number)
+      (number))))
+
 ================================================================================
 block if
 ================================================================================
@@ -55,9 +80,12 @@ if(1) { 123; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (if_statement (number)
+  (if_statement
+    (number)
     (block
-      (expression_statement (number)))))
+      (expression_statement
+        (number)))))
+
 ================================================================================
 block if/else
 ================================================================================
@@ -65,12 +93,16 @@ if(1) { 123; } else { 456; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (if_statement (number)
+  (if_statement
+    (number)
     (block
-      (expression_statement (number)))
+      (expression_statement
+        (number)))
     (else
       (block
-        (expression_statement (number))))))
+        (expression_statement
+          (number))))))
+
 ================================================================================
 block if/elsif
 ================================================================================
@@ -78,12 +110,17 @@ if(1) { 123; } elsif(2) { 456; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (if_statement (number)
+  (if_statement
+    (number)
     (block
-      (expression_statement (number)))
-    (elsif (number)
+      (expression_statement
+        (number)))
+    (elsif
+      (number)
       (block
-        (expression_statement (number))))))
+        (expression_statement
+          (number))))))
+
 ================================================================================
 block if/elsif/else
 ================================================================================
@@ -91,15 +128,21 @@ if(1) { 123; } elsif(2) { 456; } else { 789; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (if_statement (number)
+  (if_statement
+    (number)
     (block
-      (expression_statement (number)))
-    (elsif (number)
+      (expression_statement
+        (number)))
+    (elsif
+      (number)
       (block
-        (expression_statement (number)))
+        (expression_statement
+          (number)))
       (else
         (block
-          (expression_statement (number)))))))
+          (expression_statement
+            (number)))))))
+
 ================================================================================
 block unless
 ================================================================================
@@ -107,9 +150,12 @@ unless(1) { 123; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (unless_statement (number)
+  (unless_statement
+    (number)
     (block
-      (expression_statement (number)))))
+      (expression_statement
+        (number)))))
+
 ================================================================================
 block while
 ================================================================================
@@ -117,9 +163,12 @@ while(1) { 123; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (while_statement (number)
+  (while_statement
+    (number)
     (block
-      (expression_statement (number)))))
+      (expression_statement
+        (number)))))
+
 ================================================================================
 block until
 ================================================================================
@@ -127,9 +176,12 @@ until(1) { 123; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (until_statement (number)
+  (until_statement
+    (number)
     (block
-      (expression_statement (number)))))
+      (expression_statement
+        (number)))))
+
 ================================================================================
 for (LIST) BLOCK
 ================================================================================
@@ -138,10 +190,23 @@ foreach (1, 2, 3) { 456; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (for_statement (list_expression (number) (number) (number))
-    (block (expression_statement (number))))
-  (for_statement (list_expression (number) (number) (number))
-    (block (expression_statement (number)))))
+  (for_statement
+    (list_expression
+      (number)
+      (number)
+      (number))
+    (block
+      (expression_statement
+        (number))))
+  (for_statement
+    (list_expression
+      (number)
+      (number)
+      (number))
+    (block
+      (expression_statement
+        (number)))))
+
 ================================================================================
 for VAR (LIST) BLOCK
 ================================================================================
@@ -150,10 +215,27 @@ foreach $V (1, 2, 3) { 456; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (for_statement (scalar) (list_expression (number) (number) (number))
-    (block (expression_statement (number))))
-  (for_statement (scalar) (list_expression (number) (number) (number))
-    (block (expression_statement (number)))))
+  (for_statement
+    (scalar
+      (varname))
+    (list_expression
+      (number)
+      (number)
+      (number))
+    (block
+      (expression_statement
+        (number))))
+  (for_statement
+    (scalar
+      (varname))
+    (list_expression
+      (number)
+      (number)
+      (number))
+    (block
+      (expression_statement
+        (number)))))
+
 ================================================================================
 for my VAR (LIST) BLOCK
 ================================================================================
@@ -162,10 +244,27 @@ foreach my $x (1, 2, 3) { 456; }
 --------------------------------------------------------------------------------
 
 (source_file
-  (for_statement (scalar) (list_expression (number) (number) (number))
-    (block (expression_statement (number))))
-  (for_statement (scalar) (list_expression (number) (number) (number))
-    (block (expression_statement (number)))))
+  (for_statement
+    (scalar
+      (varname))
+    (list_expression
+      (number)
+      (number)
+      (number))
+    (block
+      (expression_statement
+        (number))))
+  (for_statement
+    (scalar
+      (varname))
+    (list_expression
+      (number)
+      (number)
+      (number))
+    (block
+      (expression_statement
+        (number)))))
+
 ================================================================================
 C-style for
 ================================================================================
@@ -175,14 +274,21 @@ for (my $i = 0; $i < 10; $i++) { 123; }
 (source_file
   (cstyle_for_statement
     initialiser: (assignment_expression
-      left: (variable_declaration variable: (scalar))
+      left: (variable_declaration
+        variable: (scalar
+          (varname)))
       right: (number))
     condition: (relational_expression
-      arg: (scalar)
-      arg: (number)
-    )
-    iterator: (postinc_expression operand: (scalar))
-    (block (expression_statement (number)))))
+      arg: (scalar
+        (varname))
+      arg: (number))
+    iterator: (postinc_expression
+      operand: (scalar
+        (varname)))
+    (block
+      (expression_statement
+        (number)))))
+
 ================================================================================
 use VERSION;
 ================================================================================
@@ -192,9 +298,13 @@ use v5.14;
 --------------------------------------------------------------------------------
 
 (source_file
-  (use_version_statement (number))
-  (use_version_statement (version))
-  (use_version_statement (version)))
+  (use_version_statement
+    (number))
+  (use_version_statement
+    (version))
+  (use_version_statement
+    (version)))
+
 ================================================================================
 use MODULE;
 ================================================================================
@@ -203,8 +313,12 @@ use List::Util 1.23;
 --------------------------------------------------------------------------------
 
 (source_file
-  (use_statement module: (package))
-  (use_statement module: (package) version: (number)))
+  (use_statement
+    module: (package))
+  (use_statement
+    module: (package)
+    version: (number)))
+
 ================================================================================
 package;
 ================================================================================
@@ -217,13 +331,25 @@ package ::butwhy:::::: { }
 --------------------------------------------------------------------------------
 
 (source_file
-  (package_statement (package))
-  (package_statement (package) (number))
-  (package_statement (package) (block))
-  (package_statement (package) (number) (block))
-  (package_statement (package) (block))
-  (package_statement (package) (block))
-)
+  (package_statement
+    (package))
+  (package_statement
+    (package)
+    (number))
+  (package_statement
+    (package)
+    (block))
+  (package_statement
+    (package)
+    (number)
+    (block))
+  (package_statement
+    (package)
+    (block))
+  (package_statement
+    (package)
+    (block)))
+
 ================================================================================
 Labels
 ================================================================================
@@ -235,17 +361,21 @@ ITEM: while(@items) { }
 (source_file
   (statement_label
     label: (identifier)
-    statement: (expression_statement (number)))
+    statement: (expression_statement
+      (number)))
   (statement_label
     label: (identifier)
     statement: (for_statement
-      list: (array)
+      list: (array
+        (varname))
       block: (block)))
   (statement_label
     label: (identifier)
     statement: (while_statement
-      condition: (array)
+      condition: (array
+        (varname))
       block: (block))))
+
 ================================================================================
 phasers
 ================================================================================
@@ -255,9 +385,14 @@ END { 456; }
 
 (source_file
   (phaser_statement
-    (block (expression_statement (number))))
+    (block
+      (expression_statement
+        (number))))
   (phaser_statement
-    (block (expression_statement (number)))))
+    (block
+      (expression_statement
+        (number)))))
+
 ================================================================================
 bare blocks
 ================================================================================
@@ -267,6 +402,13 @@ bare blocks
 --------------------------------------------------------------------------------
 
 (source_file
-  (block_statement (expression_statement (number)))
-  (block_statement (expression_statement (number)))
-  (block_statement (block_statement (expression_statement (number)))))
+  (block_statement
+    (expression_statement
+      (number)))
+  (block_statement
+    (expression_statement
+      (number)))
+  (block_statement
+    (block_statement
+      (expression_statement
+        (number)))))

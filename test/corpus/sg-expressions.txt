@@ -11,18 +11,21 @@ $string =~ s/pattern/replacement/gc;
 (source_file
   (expression_statement
     (assignment_expression
-      (scalar)
+      (scalar
+        (varname))
       (regex_literal
         (regex_start))))
   (expression_statement
     (assignment_expression
-      (scalar)
+      (scalar
+        (varname))
       (regex_literal
         (regex_start)
         (regex_modifier))))
   (expression_statement
     (assignment_expression
-      (scalar)
+      (scalar
+        (varname))
       (regex_literal
         (regex_start)
         (regex_modifier)
@@ -41,7 +44,8 @@ $string =~ s/my\/pattern/replacement/;
 (source_file
   (expression_statement
     (assignment_expression
-      (scalar)
+      (scalar
+        (varname))
       (regex_literal
         (regex_start)))))
 
@@ -59,11 +63,11 @@ $string = "hello world";
 (source_file
   (expression_statement
     (assignment_expression
-      (scalar)
+      (scalar (varname))
       (interpolated_string_literal)))
   (expression_statement
     (assignment_expression
-      (scalar)
+      (scalar (varname))
       (binary_expression
         (binary_expression
           (regex_literal
@@ -73,5 +77,5 @@ $string = "hello world";
         (bareword))))
   (expression_statement
     (assignment_expression
-      (scalar)
+      (scalar (varname))
       (interpolated_string_literal))))

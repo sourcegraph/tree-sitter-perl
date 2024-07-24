@@ -7,6 +7,7 @@ integers
 0b11011011011;
 1234567890198;
 --------------------------------------------------------------------------------
+
 (source_file
   (expression_statement
     (number))
@@ -18,6 +19,7 @@ integers
     (number))
   (expression_statement
     (number)))
+
 ================================================================================
 floats
 ================================================================================
@@ -30,6 +32,7 @@ floats
     (number))
   (expression_statement
     (number)))
+
 ================================================================================
 '' strings
 ================================================================================
@@ -41,11 +44,20 @@ floats
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (string_literal))
-  (expression_statement (string_literal (escaped_delimiter)))
-  (expression_statement (string_literal (escape_sequence)))
-  (expression_statement (string_literal))
-  (expression_statement (string_literal (escape_sequence))))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal
+      (escaped_delimiter)))
+  (expression_statement
+    (string_literal
+      (escape_sequence)))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal
+      (escape_sequence))))
+
 ================================================================================
 q() strings
 ================================================================================
@@ -56,10 +68,15 @@ q"literal $without interpolation";
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (string_literal))
-  (expression_statement (string_literal))
-  (expression_statement (string_literal))
-  (expression_statement (string_literal)))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal)))
+
 ================================================================================
 "" strings
 ================================================================================
@@ -71,11 +88,21 @@ q"literal $without interpolation";
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (interpolated_string_literal))
-  (expression_statement (interpolated_string_literal (escaped_delimiter)))
-  (expression_statement (interpolated_string_literal (escape_sequence)))
-  (expression_statement (interpolated_string_literal (escape_sequence)))
-  (expression_statement (interpolated_string_literal (escape_sequence))))
+  (expression_statement
+    (interpolated_string_literal))
+  (expression_statement
+    (interpolated_string_literal
+      (escaped_delimiter)))
+  (expression_statement
+    (interpolated_string_literal
+      (escape_sequence)))
+  (expression_statement
+    (interpolated_string_literal
+      (escape_sequence)))
+  (expression_statement
+    (interpolated_string_literal
+      (escape_sequence))))
+
 ================================================================================
 "" strings - no runaway barewords (fix when ambiguous funcs hit)
 ================================================================================
@@ -84,11 +111,11 @@ BAREWORD"string"
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement 
+  (expression_statement
     (ambiguous_function_call_expression
       (function)
-      (interpolated_string_literal)))
-)
+      (interpolated_string_literal))))
+
 ================================================================================
 qq() strings
 ================================================================================
@@ -98,9 +125,13 @@ qq(a (string) here);
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (interpolated_string_literal))
-  (expression_statement (interpolated_string_literal))
-  (expression_statement (interpolated_string_literal)))
+  (expression_statement
+    (interpolated_string_literal))
+  (expression_statement
+    (interpolated_string_literal))
+  (expression_statement
+    (interpolated_string_literal)))
+
 ================================================================================
 quotelike strings - tricky delimeter
 ================================================================================
@@ -109,11 +140,14 @@ q # this is a comment
    (hello);
 # another comment so this can fail properly
 --------------------------------------------------------------------------------
+
 (source_file
-  (expression_statement (string_literal))
-  (expression_statement (string_literal (comment)))
-  (comment)
-)
+  (expression_statement
+    (string_literal))
+  (expression_statement
+    (string_literal
+      (comment)))
+  (comment))
 
 ================================================================================
 Interpolation in "" strings
@@ -124,9 +158,19 @@ qq'with $scalar in single-quotes';
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (interpolated_string_literal (scalar)))
-  (expression_statement (interpolated_string_literal (array)))
-  (expression_statement (interpolated_string_literal (scalar))))
+  (expression_statement
+    (interpolated_string_literal
+      (scalar
+        (varname))))
+  (expression_statement
+    (interpolated_string_literal
+      (array
+        (varname))))
+  (expression_statement
+    (interpolated_string_literal
+      (scalar
+        (varname)))))
+
 ================================================================================
 qw() lists
 ================================================================================
@@ -140,13 +184,23 @@ qw/ hello \/ goodbye /;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (quoted_word_list))
-  (expression_statement (quoted_word_list))
-  (expression_statement (quoted_word_list))
-  (expression_statement (quoted_word_list))
-  (expression_statement (quoted_word_list))
-  (expression_statement (quoted_word_list (escape_sequence)))
-  (expression_statement (quoted_word_list (escaped_delimiter))))
+  (expression_statement
+    (quoted_word_list))
+  (expression_statement
+    (quoted_word_list))
+  (expression_statement
+    (quoted_word_list))
+  (expression_statement
+    (quoted_word_list))
+  (expression_statement
+    (quoted_word_list))
+  (expression_statement
+    (quoted_word_list
+      (escape_sequence)))
+  (expression_statement
+    (quoted_word_list
+      (escaped_delimiter))))
+
 ================================================================================
 `` strings
 ================================================================================
@@ -156,9 +210,15 @@ qw/ hello \/ goodbye /;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (command_string))
-  (expression_statement (command_string))
-  (expression_statement (command_string (scalar))))
+  (expression_statement
+    (command_string))
+  (expression_statement
+    (command_string))
+  (expression_statement
+    (command_string
+      (scalar
+        (varname)))))
+
 ================================================================================
 qx() strings
 ================================================================================
@@ -169,9 +229,13 @@ qx'command with no $interpolation';
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (command_string))
-  (expression_statement (command_string))
-  (expression_statement (command_string (scalar)))
-  (expression_statement (command_string))
-  )
-
+  (expression_statement
+    (command_string))
+  (expression_statement
+    (command_string))
+  (expression_statement
+    (command_string
+      (scalar
+        (varname))))
+  (expression_statement
+    (command_string)))

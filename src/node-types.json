@@ -954,14 +954,10 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "scalar",
+          "type": "varname",
           "named": true
         }
       ]
@@ -1644,14 +1640,10 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "scalar",
+          "type": "varname",
           "named": true
         }
       ]
@@ -4039,14 +4031,10 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "scalar",
+          "type": "varname",
           "named": true
         }
       ]
@@ -7163,14 +7151,10 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "scalar",
+          "type": "varname",
           "named": true
         }
       ]
@@ -7624,14 +7608,10 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "scalar",
+          "type": "varname",
           "named": true
         }
       ]
@@ -14288,14 +14268,10 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
-          "type": "block",
-          "named": true
-        },
-        {
-          "type": "scalar",
+          "type": "varname",
           "named": true
         }
       ]
@@ -16470,6 +16446,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "varname",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "scalar",
+          "named": true
+        }
+      ]
     }
   },
   {

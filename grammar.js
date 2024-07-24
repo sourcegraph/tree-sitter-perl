@@ -552,15 +552,16 @@ module.exports = grammar({
     method: $ => choice($._METHCALL0, $.scalar),
 
     scalar:   $ => seq('$',  $._var_indirob),
-    _declare_scalar:   $ => seq('$',  $._varname),
+    _declare_scalar:   $ => seq('$',  $.varname),
     array:    $ => seq('@',  $._var_indirob),
-    _declare_array:    $ => seq('@',  $._varname),
-    hash:     $ => seq(token(prec(2, '%')), $._var_indirob),
-    _declare_hash:    $ => seq(token(prec(2, '%')),  $._varname),
+    _declare_array:    $ => seq('@',  $.varname),
+    _HASH_PERCENT: $ => alias(token(prec(2, '%')), '%'), // self-aliasing b/c token
+    hash:     $ => seq($._HASH_PERCENT, $._var_indirob),
+    _declare_hash:    $ => seq($._HASH_PERCENT,  $.varname),
 
     arraylen: $ => seq('$#', $._var_indirob),
     // perly.y calls this `star`
-    glob:     $ => seq('*',  $._var_indirob),
+    glob: $ => seq('*', $._var_indirob),
 
     _indirob: $ => choice(
       $._bareword,
@@ -570,18 +571,19 @@ module.exports = grammar({
       $.scalar,
       $.block,
     ),
-    _varname: $ => choice(
+    varname: $ => choice(
       $._identifier,
       $._ident_special // TODO - not sure if we wanna make `my $1` error out
     ),
     // not all indirobs are alike; for variables, they have autoquoting behavior
-    _var_indirob: $ => choice(
-      $._indirob,
-      seq(
+    _var_indirob_autoquote: $ => seq(
         $._PERLY_BRACE_OPEN,
-        choice($._bareword, $._autoquotables, $._ident_special, /\^[A-Z]\w*/ ),
+        alias(choice($._bareword, $._autoquotables, $._ident_special, /\^\w+/ ), $.varname),
         $._brace_end_zw, '}'
-      )
+    ),
+    _var_indirob: $ => choice(
+      alias($._indirob, $.varname),
+      $._var_indirob_autoquote
     ),
 
     attrlist: $ => prec.left(0, seq(

@@ -6,14 +6,21 @@ do { 3; 4 };
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (do_expression
-    (block
-      (expression_statement (number))
-      (expression_statement (number)))))
-  (expression_statement (do_expression
-    (block
-      (expression_statement (number))
-      (expression_statement (number))))))
+  (expression_statement
+    (do_expression
+      (block
+        (expression_statement
+          (number))
+        (expression_statement
+          (number)))))
+  (expression_statement
+    (do_expression
+      (block
+        (expression_statement
+          (number))
+        (expression_statement
+          (number))))))
+
 ================================================================================
 Anonymous array
 ================================================================================
@@ -21,8 +28,12 @@ Anonymous array
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (anonymous_array_expression
-    (list_expression (number) (number)))))
+  (expression_statement
+    (anonymous_array_expression
+      (list_expression
+        (number)
+        (number)))))
+
 ================================================================================
 Anonymous hash
 ================================================================================
@@ -30,9 +41,13 @@ Anonymous hash
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (unary_expression
-    (anonymous_hash_expression
-      (list_expression (number) (number))))))
+  (expression_statement
+    (unary_expression
+      (anonymous_hash_expression
+        (list_expression
+          (number)
+          (number))))))
+
 ================================================================================
 Assignment
 ================================================================================
@@ -43,11 +58,25 @@ $var = 12, 34;
 
 (source_file
   (expression_statement
-    (assignment_expression (scalar) (number)))
+    (assignment_expression
+      (scalar
+        (varname))
+      (number)))
   (expression_statement
-    (assignment_expression (scalar) (binary_expression (number) (number))))
+    (assignment_expression
+      (scalar
+        (varname))
+      (binary_expression
+        (number)
+        (number))))
   (expression_statement
-    (list_expression (assignment_expression (scalar) (number)) (number))))
+    (list_expression
+      (assignment_expression
+        (scalar
+          (varname))
+        (number))
+      (number))))
+
 ================================================================================
 Slices
 ================================================================================
@@ -56,7 +85,13 @@ Slices
 
 (source_file
   (expression_statement
-    (slice_expression (list_expression (number) (number) (number)) (number))))
+    (slice_expression
+      (list_expression
+        (number)
+        (number)
+        (number))
+      (number))))
+
 ================================================================================
 Stub
 ================================================================================
@@ -64,7 +99,9 @@ Stub
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (stub_expression)))
+  (expression_statement
+    (stub_expression)))
+
 ================================================================================
 Scalar deref
 ================================================================================
@@ -73,8 +110,16 @@ $sref->$*;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (scalar (scalar)))
-  (expression_statement (scalar_deref_expression (scalar))))
+  (expression_statement
+    (scalar
+      (varname
+        (scalar
+          (varname)))))
+  (expression_statement
+    (scalar_deref_expression
+      (scalar
+        (varname)))))
+
 ================================================================================
 Array deref
 ================================================================================
@@ -83,8 +128,16 @@ $aref->@*;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (array (scalar)))
-  (expression_statement (array_deref_expression (scalar))))
+  (expression_statement
+    (array
+      (varname
+        (scalar
+          (varname)))))
+  (expression_statement
+    (array_deref_expression
+      (scalar
+        (varname)))))
+
 ================================================================================
 Hash deref
 ================================================================================
@@ -93,8 +146,16 @@ $href->%*;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (hash (scalar)))
-  (expression_statement (hash_deref_expression (scalar))))
+  (expression_statement
+    (hash
+      (varname
+        (scalar
+          (varname)))))
+  (expression_statement
+    (hash_deref_expression
+      (scalar
+        (varname)))))
+
 ================================================================================
 Amper deref
 ================================================================================
@@ -102,7 +163,11 @@ $cref->&*;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (amper_deref_expression (scalar))))
+  (expression_statement
+    (amper_deref_expression
+      (scalar
+        (varname)))))
+
 ================================================================================
 Glob deref
 ================================================================================
@@ -111,8 +176,16 @@ $gref->**;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (glob (scalar)))
-  (expression_statement (glob_deref_expression (scalar))))
+  (expression_statement
+    (glob
+      (varname
+        (scalar
+          (varname)))))
+  (expression_statement
+    (glob_deref_expression
+      (scalar
+        (varname)))))
+
 ================================================================================
 require EXPR
 ================================================================================
@@ -121,8 +194,12 @@ require;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (require_expression (number)))
-  (expression_statement (require_expression)))
+  (expression_statement
+    (require_expression
+      (number)))
+  (expression_statement
+    (require_expression)))
+
 ================================================================================
 Loopex
 ================================================================================
@@ -132,9 +209,14 @@ redo;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (loopex_expression))
-  (expression_statement (loopex_expression (label)))
-  (expression_statement (loopex_expression)))
+  (expression_statement
+    (loopex_expression))
+  (expression_statement
+    (loopex_expression
+      (label)))
+  (expression_statement
+    (loopex_expression)))
+
 ================================================================================
 goto
 ================================================================================
@@ -142,7 +224,10 @@ goto LABEL;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (goto_expression (label))))
+  (expression_statement
+    (goto_expression
+      (label))))
+
 ================================================================================
 undef
 ================================================================================
@@ -151,8 +236,13 @@ undef $var;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (undef_expression))
-  (expression_statement (undef_expression (scalar))))
+  (expression_statement
+    (undef_expression))
+  (expression_statement
+    (undef_expression
+      (scalar
+        (varname)))))
+
 ================================================================================
 local
 ================================================================================
@@ -160,7 +250,11 @@ local $var;
 --------------------------------------------------------------------------------
 
 (source_file
-  (expression_statement (localization_expression (scalar))))
+  (expression_statement
+    (localization_expression
+      (scalar
+        (varname)))))
+
 ================================================================================
 return
 ================================================================================
@@ -169,17 +263,25 @@ return 1, 2, 3;
 return 1, 2, 3 or die("never reached");
 return unless 9001;
 --------------------------------------------------------------------------------
+
 (source_file
-  (expression_statement (return_expression))
-  (expression_statement (return_expression (number) (number) (number) ))
+  (expression_statement
+    (return_expression))
+  (expression_statement
+    (return_expression
+      (number)
+      (number)
+      (number)))
   (expression_statement
     (lowprec_logical_expression
-      (return_expression (number) (number) (number) )
-      (function_call_expression (function) (interpolated_string_literal))
-    ))
+      (return_expression
+        (number)
+        (number)
+        (number))
+      (function_call_expression
+        (function)
+        (interpolated_string_literal))))
   (expression_statement
     (postfix_unless_expression
       (return_expression)
-      (number)
-      ))
-)
+      (number))))
